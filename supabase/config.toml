@@ -1,0 +1,4 @@
+project_id = "heispfgpcytuzmvhcdza"
+
+[functions.theta-ai]
+verify_jwt = false
