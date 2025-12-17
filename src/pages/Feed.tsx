@@ -107,7 +107,7 @@ const Feed = () => {
       <Sidebar currentUser={user} />
 
       <main className="flex-1 border-x border-border max-w-2xl w-full mx-auto">
-        <div className="sticky top-0 z-10 bg-background/80 backdrop-blur-md border-b border-border p-4 flex items-center justify-between">
+        <div className="sticky top-0 z-10 bg-background/80 backdrop-blur-md border-b border-border p-4 glass-card">
           <h1 className="text-xl font-bold">Home</h1>
           <div>
             <MobileHeader currentUserId={user.id} username={user?.user_metadata?.username} />

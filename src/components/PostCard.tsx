@@ -236,8 +236,8 @@ const PostCard = ({ post, currentUserId, onUpdate }: PostCardProps) => {
 
   return (
     <>
-      <article className="border-b border-border p-3 sm:p-4 hover:bg-muted/30 transition-colors">
-        <div className="flex gap-3">
+      <article className="border-b border-border p-3 sm:p-4 hover:bg-muted/30 transition-colors glass-card">
+        <div className="flex gap-3 items-start">
           <Avatar
             className="cursor-pointer h-10 w-10"
             onClick={() => navigate(`/profile/${post.profiles.username}`)}

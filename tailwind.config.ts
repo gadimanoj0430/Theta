@@ -26,10 +26,18 @@ export default {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        glass: {
+          fill: "rgba(var(--glass-fill))",
+          fill2: "rgba(var(--glass-fill-2))",
+          border: "rgba(var(--glass-border-rgba))",
+          accent1: "hsl(var(--glass-accent-1))",
+          accent2: "hsl(var(--glass-accent-2))",
+        },
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
         },
+
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",

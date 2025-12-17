@@ -65,7 +65,7 @@ const Sidebar = ({ currentUser }: SidebarProps) => {
       <div className="flex flex-col h-full">
         <div className="mb-4 flex items-center gap-3">
           <Logo className="h-10 w-10" />
-          <span className="hidden xl:inline-block text-2xl font-bold bg-gradient-to-r from-orange-500 via-white to-green-600 bg-clip-text text-transparent">
+          <span className="hidden xl:inline-block text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[hsl(var(--glass-accent-1))] to-[hsl(var(--glass-accent-2))]">
             Theta
           </span>
         </div>

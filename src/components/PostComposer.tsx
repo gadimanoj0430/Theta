@@ -33,7 +33,7 @@ const PostComposer = ({ onPostCreated }: PostComposerProps) => {
     }
 
     setImages((prev) => [...prev, ...files]);
-    
+
     files.forEach((file) => {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -50,24 +50,24 @@ const PostComposer = ({ onPostCreated }: PostComposerProps) => {
 
   const uploadImages = async (userId: string) => {
     const uploadedUrls: string[] = [];
-    
+
     for (const image of images) {
       const fileExt = image.name.split('.').pop();
       const fileName = `${userId}/${Math.random()}.${fileExt}`;
-      
+
       const { error: uploadError, data } = await supabase.storage
         .from('post-media')
         .upload(fileName, image);
 
       if (uploadError) throw uploadError;
-      
+
       const { data: { publicUrl } } = supabase.storage
         .from('post-media')
         .getPublicUrl(fileName);
-      
+
       uploadedUrls.push(publicUrl);
     }
-    
+
     return uploadedUrls;
   };
 
@@ -115,7 +115,7 @@ const PostComposer = ({ onPostCreated }: PostComposerProps) => {
       // Create poll if enabled
       if (showPoll && postData) {
         const validOptions = pollOptions.filter((opt) => opt.trim());
-        
+
         const { data: pollData, error: pollError } = await supabase
           .from("polls")
           .insert({
@@ -161,7 +161,7 @@ const PostComposer = ({ onPostCreated }: PostComposerProps) => {
   };
 
   return (
-    <div className="border-b border-border p-3 sm:p-4">
+    <div className="border-b border-border p-3 sm:p-4 glass-card">
       <Textarea
         placeholder="What's happening?"
         value={content}
@@ -169,7 +169,7 @@ const PostComposer = ({ onPostCreated }: PostComposerProps) => {
         className="min-h-[100px] sm:min-h-[120px] text-base sm:text-lg border-none focus-visible:ring-0 resize-none"
         maxLength={280}
       />
-      
+
       {imagePreviews.length > 0 && (
         <div className="grid grid-cols-2 gap-2 mt-3">
           {imagePreviews.map((preview, index) => (
@@ -209,18 +209,18 @@ const PostComposer = ({ onPostCreated }: PostComposerProps) => {
             className="hidden"
             onChange={handleImageSelect}
           />
-          <Button 
-            variant="ghost" 
-            size="icon" 
+          <Button
+            variant="ghost"
+            size="icon"
             className="text-primary"
             onClick={() => fileInputRef.current?.click()}
             disabled={images.length >= 4 || showPoll}
           >
             <Image className="h-5 w-5" />
           </Button>
-          <Button 
-            variant="ghost" 
-            size="icon" 
+          <Button
+            variant="ghost"
+            size="icon"
             className={`${showPoll ? 'text-primary' : ''}`}
             onClick={() => setShowPoll(!showPoll)}
             disabled={images.length > 0}
@@ -230,7 +230,7 @@ const PostComposer = ({ onPostCreated }: PostComposerProps) => {
           <Button variant="ghost" size="icon" className="text-primary">
             <Smile className="h-5 w-5" />
           </Button>
-          <AIAssistant 
+          <AIAssistant
             onSuggestionSelect={(suggestion) => setContent(suggestion)}
             currentContent={content}
           />
@@ -238,9 +238,8 @@ const PostComposer = ({ onPostCreated }: PostComposerProps) => {
 
         <div className="flex items-center gap-3">
           <span
-            className={`text-sm ${
-              content.length > 280 ? "text-destructive" : "text-muted-foreground"
-            }`}
+            className={`text-sm ${content.length > 280 ? "text-destructive" : "text-muted-foreground"
+              }`}
           >
             {content.length}/280
           </span>

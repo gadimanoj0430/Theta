@@ -33,7 +33,7 @@ export function ThemeProvider({
   useEffect(() => {
     const root = window.document.documentElement;
 
-    root.classList.remove("light", "dark");
+    root.classList.remove("light", "dark", "glass");
 
     if (theme === "system") {
       const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
@@ -45,7 +45,23 @@ export function ThemeProvider({
       return;
     }
 
+    // If user selects glass theme (we repurpose 'light' + glass class), allow toggling
+    if (theme === "glass") {
+      root.classList.add("dark", "glass");
+      return;
+    }
+
     root.classList.add(theme);
+  }, [theme]);
+
+  useEffect(() => {
+    // Add a CSS variable to indicate if glass is active for components
+    const root = window.document.documentElement;
+    if (theme === "glass") {
+      root.setAttribute("data-theme", "glass");
+    } else {
+      root.removeAttribute("data-theme");
+    }
   }, [theme]);
 
   const value = {
