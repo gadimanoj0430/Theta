@@ -9,7 +9,7 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { useTheme } from "@/components/ThemeProvider";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sparkles, Sun } from "lucide-react";
 
 const Settings = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -121,20 +121,35 @@ const Settings = () => {
               <CardDescription>Customize how the app looks</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  {theme === "dark" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
-                  <Label htmlFor="dark-mode">Dark Mode</Label>
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Sun className="h-4 w-4" />
+                    <Label>Light</Label>
+                  </div>
+                  <button onClick={() => setTheme("light")} className={`px-3 py-1 rounded-lg ${theme === "light" ? "bg-muted/60" : "bg-muted"}`}>Select</button>
                 </div>
-                <Switch 
-                  id="dark-mode" 
-                  checked={theme === "dark"}
-                  onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
-                />
+
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Moon className="h-4 w-4" />
+                    <Label>Dark</Label>
+                  </div>
+                  <button onClick={() => setTheme("dark")} className={`px-3 py-1 rounded-lg ${theme === "dark" ? "bg-muted/60" : "bg-muted"}`}>Select</button>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Sparkles className="h-4 w-4" />
+                    <Label>Glass</Label>
+                  </div>
+                  <button onClick={() => setTheme("glass")} className={`px-3 py-1 rounded-lg ${theme === "glass" ? "bg-muted/60" : "bg-muted"}`}>Select</button>
+                </div>
+
+                <p className="text-sm text-muted-foreground">
+                  Currently using {theme} mode
+                </p>
               </div>
-              <p className="text-sm text-muted-foreground">
-                Currently using {theme} mode
-              </p>
             </CardContent>
           </Card>
         </div>

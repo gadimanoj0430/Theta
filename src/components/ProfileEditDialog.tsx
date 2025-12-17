@@ -78,6 +78,40 @@ const ProfileEditDialog = ({ profile, onUpdate }: ProfileEditDialogProps) => {
     }
   };
 
+  const removeStorageFileIfPresent = async (url: string) => {
+    try {
+      if (!url) return;
+      const parts = url.split('/post-media/');
+      if (parts.length < 2) return;
+      const path = parts[1];
+      await supabase.storage.from('post-media').remove([path]);
+    } catch (e) {
+      // ignore storage remove failures
+    }
+  };
+
+  const handleRemoveAvatar = async () => {
+    setUploading(true);
+    try {
+      await removeStorageFileIfPresent(avatarUrl);
+      setAvatarUrl("");
+      toast({ title: "Avatar removed" });
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleRemoveBanner = async () => {
+    setUploading(true);
+    try {
+      await removeStorageFileIfPresent(bannerUrl);
+      setBannerUrl("");
+      toast({ title: "Banner removed" });
+    } finally {
+      setUploading(false);
+    }
+  };
+
   const handleSave = async () => {
     setLoading(true);
     try {
@@ -144,6 +178,11 @@ const ProfileEditDialog = ({ profile, onUpdate }: ProfileEditDialogProps) => {
                   disabled={uploading}
                   className="max-w-[200px]"
                 />
+                <div className="mt-2 flex gap-2">
+                  <Button variant="ghost" size="sm" onClick={handleRemoveAvatar} disabled={uploading}>
+                    Remove avatar
+                  </Button>
+                </div>
                 <p className="text-xs text-muted-foreground mt-1">
                   JPG, PNG or GIF. Max 5MB.
                 </p>
@@ -157,6 +196,13 @@ const ProfileEditDialog = ({ profile, onUpdate }: ProfileEditDialogProps) => {
               {bannerUrl && (
                 <div className="w-full h-32 rounded-lg overflow-hidden bg-muted">
                   <img src={bannerUrl} alt="Banner" className="w-full h-full object-cover" />
+                </div>
+              )}
+              {bannerUrl && (
+                <div className="mt-2">
+                  <Button variant="ghost" size="sm" onClick={handleRemoveBanner} disabled={uploading}>
+                    Remove banner
+                  </Button>
                 </div>
               )}
               <Input

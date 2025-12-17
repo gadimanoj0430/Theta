@@ -139,7 +139,7 @@ const ChatInterface = ({
       {/* Header */}
       <div className="sticky top-0 z-10 bg-background border-b border-border px-3 sm:px-4 py-3">
         <div className="flex items-center justify-between">
-          <div 
+          <div
             className="flex items-center gap-3 cursor-pointer"
             onClick={() => navigate(`/profile/${otherUser.username}`)}
           >
@@ -199,7 +199,7 @@ const ChatInterface = ({
               {msgs.map((message: Message, index: number) => {
                 const isOwn = message.sender_id === currentUserId;
                 const showAvatar = !isOwn && (index === 0 || msgs[index - 1]?.sender_id !== message.sender_id);
-                
+
                 return (
                   <div
                     key={message.id}
@@ -218,11 +218,10 @@ const ChatInterface = ({
                       </div>
                     )}
                     <div
-                      className={`max-w-[70%] rounded-3xl px-4 py-2.5 ${
-                        isOwn
+                      className={`max-w-[70%] rounded-3xl px-4 py-2.5 ${isOwn
                           ? "bg-primary text-primary-foreground"
                           : "bg-muted"
-                      }`}
+                        }`}
                     >
                       <p className="break-words text-sm">{message.content}</p>
                     </div>

@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
 import animatedLogo from "@/assets/xtheta-logo-animated.mp4";
+import Logo from "@/components/Logo";
 
 const signUpSchema = z.object({
   username: z.string().min(3).max(20).regex(/^[a-zA-Z0-9_]+$/),
@@ -87,14 +88,9 @@ const Auth = () => {
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <div className="w-full max-w-md space-y-8">
         <div className="text-center">
-          <video
-            src={animatedLogo}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="mx-auto h-24 w-24 rounded-full bg-black"
-          />
+          <div className="mx-auto h-24 w-24 rounded-full bg-gradient-to-br from-sky-400 to-sky-300 flex items-center justify-center">
+            <Logo variant="sky" className="h-16 w-16" />
+          </div>
           <h1 className="mt-6 text-3xl font-bold">
             {isSignUp ? "Join XTheta today" : "Sign in to XTheta"}
           </h1>

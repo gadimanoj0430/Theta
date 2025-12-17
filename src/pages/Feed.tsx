@@ -7,6 +7,7 @@ import PostCard from "@/components/PostCard";
 import Sidebar from "@/components/Sidebar";
 import MobileHeader from "@/components/MobileHeader";
 import { Loader2 } from "lucide-react";
+import Logo from "@/components/Logo";
 
 interface Post {
   id: string;
@@ -107,9 +108,12 @@ const Feed = () => {
       <Sidebar currentUser={user} />
 
       <main className="flex-1 border-x border-border max-w-2xl w-full mx-auto">
-        <div className="sticky top-0 z-10 bg-background/80 backdrop-blur-md border-b border-border p-4 glass-card">
-          <h1 className="text-xl font-bold">Home</h1>
-          <div>
+        <div className="sticky top-0 z-10 bg-background/80 backdrop-blur-md border-b border-border p-4 glass-card flex items-center gap-4">
+          <div className="flex items-center gap-3">
+            <Logo variant="sky" className="h-10 w-10" />
+            <h1 className="text-xl font-bold">Home</h1>
+          </div>
+          <div className="ml-auto">
             <MobileHeader currentUserId={user.id} username={user?.user_metadata?.username} />
           </div>
         </div>

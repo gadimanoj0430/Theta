@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -46,6 +46,9 @@ const PostCard = ({ post, currentUserId, onUpdate }: PostCardProps) => {
   const [isReplying, setIsReplying] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [repliesCount, setRepliesCount] = useState(post.replies_count || 0);
+  const [showComments, setShowComments] = useState(false);
+  const [comments, setComments] = useState<typeof post[]>([]);
+  const [loadingComments, setLoadingComments] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -68,6 +71,26 @@ const PostCard = ({ post, currentUserId, onUpdate }: PostCardProps) => {
     };
     fetchRepliesCount();
   });
+
+  const fetchComments = async () => {
+    setLoadingComments(true);
+    try {
+      const { data, error } = await supabase
+        .from("posts")
+        .select(
+          `*, profiles!posts_user_id_fkey (username, display_name, avatar_url)`
+        )
+        .eq("parent_post_id", post.id)
+        .order("created_at", { ascending: false });
+
+      if (error) throw error;
+      setComments(data || []);
+    } catch (e) {
+      // ignore for now
+    } finally {
+      setLoadingComments(false);
+    }
+  };
 
   const handleLike = async () => {
     setIsLiking(true);
@@ -288,7 +311,11 @@ const PostCard = ({ post, currentUserId, onUpdate }: PostCardProps) => {
                 variant="ghost"
                 size="sm"
                 className="gap-2 text-muted-foreground hover:text-primary"
-                onClick={() => setShowReplyDialog(true)}
+                onClick={async () => {
+                  const willShow = !showComments;
+                  setShowComments(willShow);
+                  if (willShow) await fetchComments();
+                }}
               >
                 <MessageCircle className="h-4 w-4" />
                 <span className="text-sm">{repliesCount}</span>
@@ -346,6 +373,39 @@ const PostCard = ({ post, currentUserId, onUpdate }: PostCardProps) => {
           </div>
         </div>
       </article>
+
+      {/* Inline comments viewer */}
+      {showComments && (
+        <div className="pl-12 pr-4 pb-4">
+          {loadingComments ? (
+            <div className="py-4 text-center text-sm text-muted-foreground">Loading comments...</div>
+          ) : comments.length === 0 ? (
+            <div className="py-4 text-sm text-muted-foreground">No comments yet.</div>
+          ) : (
+            comments.map((c) => (
+              <div key={c.id} className="flex gap-3 items-start border-t border-border pt-3">
+                <Avatar className="h-8 w-8">
+                  <AvatarImage src={c.profiles.avatar_url || undefined} />
+                  <AvatarFallback>{c.profiles.display_name?.[0] || c.profiles.username[0]}</AvatarFallback>
+                </Avatar>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2">
+                    <span className="font-bold text-sm">{c.profiles.display_name || c.profiles.username}</span>
+                    <span className="text-muted-foreground text-sm">@{c.profiles.username}</span>
+                    <span className="text-muted-foreground text-sm">·</span>
+                    <span className="text-muted-foreground text-sm">{formatDistanceToNow(new Date(c.created_at), { addSuffix: true })}</span>
+                  </div>
+                  <p className="text-sm mt-1 whitespace-pre-wrap">{c.content}</p>
+                </div>
+              </div>
+            ))
+          )}
+
+          <div className="mt-3">
+            <Button onClick={() => setShowReplyDialog(true)}>Reply</Button>
+          </div>
+        </div>
+      )}
 
       {/* Reply Dialog */}
       <Dialog open={showReplyDialog} onOpenChange={setShowReplyDialog}>

@@ -75,7 +75,7 @@ const AIAssistant = ({ onSuggestionSelect, currentContent }: AIAssistantProps) =
       });
       return;
     }
-    
+
     const result = await callAI("improve_post", currentContent);
     if (result) {
       setSuggestions([result]);
@@ -91,7 +91,7 @@ const AIAssistant = ({ onSuggestionSelect, currentContent }: AIAssistantProps) =
       });
       return;
     }
-    
+
     const result = await callAI("suggest_hashtags", currentContent);
     if (result) {
       setSuggestions([result]);

@@ -35,7 +35,7 @@ const ConversationList = ({
 
   useEffect(() => {
     fetchConversations();
-    
+
     // Subscribe to new messages for real-time updates
     const channel = supabase
       .channel("conversations-changes")
@@ -121,7 +121,7 @@ const ConversationList = ({
         };
       });
 
-      conversationsData.sort((a, b) => 
+      conversationsData.sort((a, b) =>
         new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
       );
 
@@ -155,9 +155,8 @@ const ConversationList = ({
         <button
           key={conv.id}
           onClick={() => onSelectConversation(conv.id, conv.other_user)}
-          className={`w-full p-4 hover:bg-muted/30 transition-colors text-left ${
-            selectedConversationId === conv.id ? "bg-muted/50" : ""
-          }`}
+          className={`w-full p-4 hover:bg-muted/30 transition-colors text-left ${selectedConversationId === conv.id ? "bg-muted/50" : ""
+            }`}
         >
           <div className="flex gap-3 items-center">
             <Avatar className="h-10 w-10 sm:h-12 sm:w-12">
