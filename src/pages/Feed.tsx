@@ -5,6 +5,7 @@ import { User } from "@supabase/supabase-js";
 import PostComposer from "@/components/PostComposer";
 import PostCard from "@/components/PostCard";
 import Sidebar from "@/components/Sidebar";
+import MobileHeader from "@/components/MobileHeader";
 import { Loader2 } from "lucide-react";
 
 interface Post {
@@ -106,8 +107,11 @@ const Feed = () => {
       <Sidebar currentUser={user} />
 
       <main className="flex-1 border-x border-border max-w-2xl w-full mx-auto">
-        <div className="sticky top-0 z-10 bg-background/80 backdrop-blur-md border-b border-border p-4">
+        <div className="sticky top-0 z-10 bg-background/80 backdrop-blur-md border-b border-border p-4 flex items-center justify-between">
           <h1 className="text-xl font-bold">Home</h1>
+          <div>
+            <MobileHeader currentUserId={user.id} username={user?.user_metadata?.username} />
+          </div>
         </div>
 
         <PostComposer onPostCreated={fetchPosts} />

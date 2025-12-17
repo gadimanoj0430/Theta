@@ -161,12 +161,12 @@ const PostComposer = ({ onPostCreated }: PostComposerProps) => {
   };
 
   return (
-    <div className="border-b border-border p-4">
+    <div className="border-b border-border p-3 sm:p-4">
       <Textarea
         placeholder="What's happening?"
         value={content}
         onChange={(e) => setContent(e.target.value)}
-        className="min-h-[120px] text-lg border-none focus-visible:ring-0 resize-none"
+        className="min-h-[100px] sm:min-h-[120px] text-base sm:text-lg border-none focus-visible:ring-0 resize-none"
         maxLength={280}
       />
       
