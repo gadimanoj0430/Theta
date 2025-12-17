@@ -236,10 +236,10 @@ const PostCard = ({ post, currentUserId, onUpdate }: PostCardProps) => {
 
   return (
     <>
-      <article className="border-b border-border p-4 hover:bg-muted/30 transition-colors">
+      <article className="border-b border-border p-3 sm:p-4 hover:bg-muted/30 transition-colors">
         <div className="flex gap-3">
           <Avatar
-            className="cursor-pointer"
+            className="cursor-pointer h-10 w-10"
             onClick={() => navigate(`/profile/${post.profiles.username}`)}
           >
             <AvatarImage src={post.profiles.avatar_url || undefined} />
@@ -248,7 +248,7 @@ const PostCard = ({ post, currentUserId, onUpdate }: PostCardProps) => {
             </AvatarFallback>
           </Avatar>
 
-          <div className="flex-1">
+          <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
               <span
                 className="font-bold hover:underline cursor-pointer"

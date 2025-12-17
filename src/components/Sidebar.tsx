@@ -31,10 +31,10 @@ const Sidebar = ({ currentUser }: SidebarProps) => {
         .select("username")
         .eq("id", currentUser.id)
         .single();
-      
+
       if (data) setUsername(data.username);
     };
-    
+
     fetchUsername();
   }, [currentUser.id]);
 
@@ -61,7 +61,7 @@ const Sidebar = ({ currentUser }: SidebarProps) => {
   ];
 
   return (
-    <aside className="w-20 xl:w-64 h-screen sticky top-0 flex flex-col p-4">
+    <aside className="hidden md:flex md:w-20 xl:w-64 h-screen sticky top-0 flex-col p-4">
       <div className="flex flex-col h-full">
         <div className="mb-4 flex items-center gap-3">
           <Logo className="h-10 w-10" />
@@ -75,7 +75,7 @@ const Sidebar = ({ currentUser }: SidebarProps) => {
             <Link key={item.path} to={item.path}>
               <Button
                 variant="ghost"
-                className="w-full justify-start xl:justify-start hover:bg-muted/50 rounded-full"
+                className="w-full justify-center md:justify-center xl:justify-start hover:bg-muted/50 rounded-full"
               >
                 <item.icon className="h-6 w-6" />
                 <span className="hidden xl:inline-block ml-4 text-xl">

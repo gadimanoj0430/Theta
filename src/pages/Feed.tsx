@@ -104,8 +104,8 @@ const Feed = () => {
   return (
     <div className="min-h-screen bg-background flex">
       <Sidebar currentUser={user} />
-      
-      <main className="flex-1 border-x border-border max-w-2xl">
+
+      <main className="flex-1 border-x border-border max-w-2xl w-full mx-auto">
         <div className="sticky top-0 z-10 bg-background/80 backdrop-blur-md border-b border-border p-4">
           <h1 className="text-xl font-bold">Home</h1>
         </div>
