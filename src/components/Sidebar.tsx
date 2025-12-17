@@ -14,6 +14,7 @@ import {
   LogOut,
   Settings as SettingsIcon,
 } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 interface SidebarProps {
   currentUser: User;
@@ -68,6 +69,9 @@ const Sidebar = ({ currentUser }: SidebarProps) => {
           <span className="hidden xl:inline-block text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[hsl(var(--glass-accent-1))] to-[hsl(var(--glass-accent-2))]">
             Theta
           </span>
+          <div className="ml-auto hidden md:block">
+            <ThemeToggle />
+          </div>
         </div>
 
         <nav className="flex-1 space-y-2">
