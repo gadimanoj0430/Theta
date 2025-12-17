@@ -137,7 +137,7 @@ const ChatInterface = ({
   return (
     <div className="flex flex-col h-full bg-background">
       {/* Header */}
-      <div className="sticky top-0 z-10 bg-background border-b border-border px-4 py-3">
+      <div className="sticky top-0 z-10 bg-background border-b border-border px-3 sm:px-4 py-3">
         <div className="flex items-center justify-between">
           <div 
             className="flex items-center gap-3 cursor-pointer"
@@ -173,7 +173,7 @@ const ChatInterface = ({
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto px-4 py-4">
+      <div className="flex-1 overflow-y-auto px-3 sm:px-4 py-4">
         {messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-center">
             <Avatar className="h-20 w-20 mb-4">
@@ -236,8 +236,8 @@ const ChatInterface = ({
       </div>
 
       {/* Input */}
-      <div className="border-t border-border p-4">
-        <div className="flex items-center gap-3 bg-muted rounded-full px-4 py-2">
+      <div className="border-t border-border p-3">
+        <div className="flex items-center gap-3 bg-muted rounded-full px-3 py-2">
           <Input
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}

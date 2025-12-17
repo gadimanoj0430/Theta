@@ -159,8 +159,8 @@ const ConversationList = ({
             selectedConversationId === conv.id ? "bg-muted/50" : ""
           }`}
         >
-          <div className="flex gap-3">
-            <Avatar>
+          <div className="flex gap-3 items-center">
+            <Avatar className="h-10 w-10 sm:h-12 sm:w-12">
               <AvatarImage src={conv.other_user.avatar_url || undefined} />
               <AvatarFallback>
                 {conv.other_user.display_name?.[0] || conv.other_user.username[0]}

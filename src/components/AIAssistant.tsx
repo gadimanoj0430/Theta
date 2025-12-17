@@ -115,7 +115,7 @@ const AIAssistant = ({ onSuggestionSelect, currentContent }: AIAssistantProps) =
           AI Assistant
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-2xl">
+      <DialogContent className="w-full max-w-full sm:max-w-2xl">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Sparkles className="h-5 w-5 text-primary" />
